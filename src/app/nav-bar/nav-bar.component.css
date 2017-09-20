@@ -1,4 +1,17 @@
-.nav-btn {
+.nav-btn
+{
     float: right;
-    line-height: 2;
+    line-height: 3;
+}
+.navbar-brand
+{
+  font-family: 'Lato', sans-serif;
+  color:rgb(15, 13, 13);
+  font-size: 45px;
+  margin: 0px;
+}
+
+nav.navbar 
+{
+    background:rgb(184, 177, 177);
 }
