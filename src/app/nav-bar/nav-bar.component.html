@@ -4,8 +4,13 @@
     <img src="http://nayyarhospital.com/wp-content/uploads/2016/01/p1.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
     OPD System
   </a>
-  <div class="nav-btn">
+  <div class="nav-btn" *ngIf="!isLoggedIn()">
       <a class="btn btn-primary btn-sm" routerLink="/register" routerLinkActive="active">Register</a>
       <a class="btn btn-success btn-sm" routerLink="/login" routerLinkActive="active">Login</a>  
-    </div>
+  </div>
+  <div class="nav-btn" *ngIf="isLoggedIn()">
+    <b>{{user?.firstName}}  {{user?.lastName}}</b>
+    <a class="btn btn-success btn-sm" (click)="logout()">Loout</a>  
+  </div>
+
 </nav>
