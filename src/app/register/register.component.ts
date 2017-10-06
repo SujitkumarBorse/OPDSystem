@@ -23,18 +23,26 @@ export class RegisterComponent {
     register() {
         this.loading = true;
 
-        console.log("Data to register user : ", this.model)
+        console.log("Data to register user : ", this.model);
 
+        if(this.model.email && this.model.firstName && this.model.medicalRegistrationNo && this.model.password && this.model.confirmPassword){
+            this.userService.create(this.model)
+                .subscribe(
+                    data => {
+                        debugger;
+                        this.alertService.success('Registration successful', true);
+                        this.router.navigate(['/login']);
+                    },
+                    error => {
+                        this.alertService.error(error);
+                        this.loading = false;
+                    });
+        }else {
+            alert("Please enter all mandatory fields.");
+        }
 
-        // this.userService.create(this.model)
-        //     .subscribe(
-        //         data => {
-        //             this.alertService.success('Registration successful', true);
-        //             this.router.navigate(['/login']);
-        //         },
-        //         error => {
-        //             this.alertService.error(error);
-        //             this.loading = false;
-        //         });
+        if(this.model.password !== this.model.confirmPassword){
+            alert("Confirm password does not match.");
+        }
     }
 }

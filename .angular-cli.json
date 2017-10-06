@@ -21,7 +21,18 @@
       "styles": [
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "./app/style/vendor/jquery/jquery.min.js",
+        "./app/style/vendor/popper/popper.min.js",
+        "./app/style/vendor/bootstrap/js/bootstrap.min.js",
+        "./app/style/vendor/jquery-easing/jquery.easing.min.js",
+        "./app/style/vendor/chart.js/Chart.min.js",
+        "./app/style/vendor/datatables/jquery.dataTables.js",
+        "./app/style/vendor/datatables/dataTables.bootstrap4.js",
+        "./app/style/js/sb-admin.min.js",
+        "./app/style/js/sb-admin-datatables.min.js",
+        "./app/style/js/sb-admin-charts.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

@@ -14,6 +14,8 @@ import { AlertService } from './services/alert/alert.service';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './services/auth.guard';
+import { UserService } from './services/user/user.service';
+import { HttpModule } from '@angular/http';
 
 
 @NgModule({
@@ -29,13 +31,15 @@ import { AuthGuard } from './services/auth.guard';
     Routing,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   providers: [
     AuthGuard,
     HttpService,
     AuthenticationService,
-    AlertService
+    AlertService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
