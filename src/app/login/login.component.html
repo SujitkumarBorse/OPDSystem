@@ -19,6 +19,7 @@
                     />
                     <a [routerLink]="['/register']" class="btn btn-link">Register</a>
                 </div>
+                <div *ngIf="error" class="alert alert-danger">{{error}}</div>
             </form>
         </div>
     </div>

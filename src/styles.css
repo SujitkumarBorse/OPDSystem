@@ -3,3 +3,16 @@
 @import "./app/style/sb-admin.min.css";
 @import "./app/style/vendor/font-awesome/css/font-awesome.min.css";
 @import "./app/style/vendor/datatables/dataTables.bootstrap4.css";
+
+body, html {
+    /* The image used */
+    background-image: url("assets/images/medical2.jpg");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
