@@ -13,11 +13,11 @@ export class NavBarComponent implements OnInit, OnChanges {
   constructor(private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.user = this.authService.getUser();
   }
   
   ngOnChanges() {
-    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.user = this.authService.getUser();
   }
 
   isLoggedIn() {

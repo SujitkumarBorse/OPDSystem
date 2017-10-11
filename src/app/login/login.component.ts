@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
                 // login successful if there's a jwt token in the response
                 if (user && user['status'] == 'success' && user['token']) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    localStorage.setItem('currentUser', JSON.stringify(user['token']));
                     this.router.navigate(['/home']);
                 } else {
                     this.alertService.error(user['message']);
