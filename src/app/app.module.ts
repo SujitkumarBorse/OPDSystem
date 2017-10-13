@@ -16,6 +16,12 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './services/auth.guard';
 import { UserService } from './services/user/user.service';
 import { HttpModule } from '@angular/http';
+import { PatientsComponent } from './patients/patients.component';
+import { AppointmentComponent } from './appointment/appointment.component';
+import { BillingComponent } from './billing/billing.component';
+import { AccountComponent } from './account/account.component';
+import { ClinicTestComponent } from './clinic-test/clinic-test.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -24,7 +30,13 @@ import { HttpModule } from '@angular/http';
     NavBarComponent,
     RegisterComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    PatientsComponent,
+    AppointmentComponent,
+    BillingComponent,
+    AccountComponent,
+    ClinicTestComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
