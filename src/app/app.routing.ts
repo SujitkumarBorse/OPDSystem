@@ -16,13 +16,17 @@ const appRoutes: Routes = [
     { path: '', redirectTo: "/login", pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'patient', component: PatientsComponent, canActivate: [AuthGuard] },
-    { path: 'appointment', component: AppointmentComponent, canActivate: [AuthGuard] },
-    { path: 'bill', component: BillingComponent, canActivate: [AuthGuard] },
-    { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
-    { path: 'clinical-tests', component: ClinicTestComponent, canActivate: [AuthGuard] },
+    {
+        path: 'app', component: DashboardComponent,
+        children: [
+            { path: 'home', component: HomeComponent },
+            { path: 'patient', component: PatientsComponent },
+            { path: 'appointment', component: AppointmentComponent },
+            { path: 'bill', component: BillingComponent },
+            { path: 'account', component: AccountComponent },
+            { path: 'clinical-tests', component: ClinicTestComponent }
+        ]
+    },
     // otherwise redirect to login
     { path: '**', redirectTo: '/login' }
 ];
