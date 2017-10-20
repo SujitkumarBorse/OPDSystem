@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(user => {
                 console.log("Response after login ", user);
-                debugger;
                 // login successful if there's a jwt token in the response
                 if (user && user['status'] == 'success' && user['token']) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes

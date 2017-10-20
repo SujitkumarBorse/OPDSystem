@@ -17,6 +17,7 @@ import { AuthGuard } from './services/auth.guard';
 import { UserService } from './services/user/user.service';
 import { HttpModule } from '@angular/http';
 import { PatientsComponent } from './patients/patients.component';
+import { AddPatientComponent } from './patients/add-patient.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { BillingComponent } from './billing/billing.component';
 import { AccountComponent } from './account/account.component';
@@ -32,6 +33,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LoginComponent,
     HomeComponent,
     PatientsComponent,
+    AddPatientComponent,
     AppointmentComponent,
     BillingComponent,
     AccountComponent,

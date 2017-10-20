@@ -16,3 +16,24 @@ body, html {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.mt-sm {
+    margin-top: 5px;
+}
+.mb-sm {
+    margin-bottom: 5px;
+}
+
+.mt-md {
+    margin-top: 10px;
+}
+.mb-md {
+    margin-bottom: 10px;
+}
+
+.mt-lg {
+    margin-top: 15px;
+}
+.mb-lg {
+    margin-bottom: 15px;
+}
