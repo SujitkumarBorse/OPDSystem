@@ -1,11 +1,92 @@
 <!-- Example DataTables Card-->
 <div class="row  mb-md">
   <div class="col-md-12">
+    <b>Patient Registration!</b>
     <button type="button" class="btn btn-primary pull-right" (click)="cancel()">Go To Patient List</button>
   </div>
 </div>
 <div class="row  mb-md">
   <div class="col-md-12">
-    Add Patient Form
+    <div class="container">
+      <form [formGroup]="patientForm" (ngSubmit)="savePatient()">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="name">First Name * : </label>
+              <input type="text" formControlName="firstName" class="form-control">
+            </div>
+            <p class="help-block" *ngIf="!patientForm.get('firstName').valid && patientForm.get('firstName').touched">Please enter first name.</p>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="name">Middle Name: </label>
+              <input type="text" formControlName="middleName" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="name">Last Name * : </label>
+              <input type="text" formControlName="lastName" class="form-control">
+            </div>
+            <p class="help-block" *ngIf="!patientForm.get('lastName').valid && patientForm.get('lastName').touched">Please enter last name.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="grnder">Gender : </label>
+              <label for="m">Male
+                <input type="radio" name="gender" value="male" id="male" class="form-control" formControlName="gender" />
+              </label>
+              <label for="f">Female
+                <input type="radio" name="gender" value="female" id="female" class="form-control" formControlName="gender" />
+              </label>
+              <p class="help-block" *ngIf="!patientForm.get('gender').valid && patientForm.get('gender').touched">Gender is required</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="dob">Date Of Birth: </label>
+              <date-picker ngModel name="date" formControlName="dob"></date-picker>
+            </div>
+            <p class="help-block" *ngIf="!patientForm.get('dob').valid && patientForm.get('dob').touched">Please enter date of birth.</p>
+          </div>
+        </div>
+        <div formGroupName="address">
+
+          <div class="row">
+            <div class="col-md-4">
+              <label>Address : </label>
+              <input type="text" class="form-control" formControlName="address">
+            </div>
+            <div class="col-md-4">
+              <label>City : </label>
+              <input type="text" class="form-control" formControlName="city">
+            </div>
+            <div class="col-md-4">
+              <label>State : </label>
+              <input type="text" class="form-control" formControlName="state">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <label>Country : </label>
+              <input type="text" class="form-control" formControlName="country">
+            </div>
+            <div class="col-md-4">
+              <label>Zip:</label>
+              <input type="text" class="form-control" formControlName="zip">
+            </div>
+          </div>
+        </div>
+        <div class="row mt-md">
+          <div class="col-md-12">
+            <div class="form-group">
+              <button class="btn btn-primary" type="Submit" [disabled]="!patientForm.valid">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

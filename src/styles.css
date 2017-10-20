@@ -37,3 +37,10 @@ body, html {
 .mb-lg {
     margin-bottom: 15px;
 }
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+p.help-block {
+    color: red !important;
+}

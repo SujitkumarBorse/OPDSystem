@@ -23,10 +23,11 @@ const appRoutes: Routes = [
             { path: 'patient', component: PatientsComponent },
             { path: 'patient/add', component: AddPatientComponent },
             { path: 'appointment', component: AppointmentComponent },
+            { path: 'appointment/today', component: AppointmentComponent },
             { path: 'appointment/add', component: AppointmentComponent },
             { path: 'bill', component: BillingComponent },
             { path: 'account', component: AccountComponent },
-            { path: 'clinical-tests', component: ClinicTestComponent }
+            // { path: 'clinical-tests', component: ClinicTestComponent }
         ]
     },
     // otherwise redirect to login

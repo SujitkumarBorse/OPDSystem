@@ -11,7 +11,6 @@ export class PatientsComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   addPatient(){
-    debugger;
     this.router.navigate(['app/patient/add']);
   }
 

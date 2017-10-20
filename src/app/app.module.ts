@@ -1,8 +1,13 @@
+import { BillingService } from './services/billing/billing.service';
+import { AppointmentService } from './services/appointment/appointment.service';
+import { PatientService } from './services/patient/patient.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Routing } from './app.routing';
+import { DatePickerModule } from "angular-io-datepicker";
+import { OverlayModule } from "angular-io-overlay";
 
+import { Routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RegisterComponent } from './register/register.component';
@@ -46,14 +51,19 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    DatePickerModule,
+    OverlayModule
   ],
   providers: [
     AuthGuard,
     HttpService,
     AuthenticationService,
     AlertService,
-    UserService
+    UserService,
+    PatientService,
+    AppointmentService,
+    BillingService
   ],
   bootstrap: [AppComponent]
 })
