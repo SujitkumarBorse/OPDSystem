@@ -1,3 +1,71 @@
-<p>
-  appointment works!
-</p>
+<div class="card mb-3">
+  <div class="card-header">
+    <i class="fa fa-table"></i>
+    <b *ngIf="isAddPage">Create</b>
+    <b> Appointment</b>
+  </div>
+  <div class="card-body">
+
+    <div class="row  mb-lg" *ngIf="isAddPage">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="form-control">{{patientDetails.firstName}}</label>
+          </div>
+          <div class="col-md-4">
+            <label class="form-control"> {{patientDetails.lastName}}</label>
+          </div>
+          <div class="col-md-4">
+            <label class="form-control">{{patientDetails?.contact?.mobile}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-md">
+            <select class="form-control" [(ngModel)]="appointmentModel.status">
+              <option *ngFor="let title of statusList" [value]="title.id">{{title.name}}</option>
+            </select>
+          </div>
+          <div class="col-md-6 mb-md">
+            <date-picker mode="datetime" [(ngModel)]="appointmentModel.dateTime"></date-picker>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mb-md text-center">
+            <button class="btn btn-primary" (click)="bookAppointment()"> Save/Update Appointment</button>
+            <button class="btn btn-default" (click)="cancel()"> Cancel </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Patient Id</th>
+            <th>Patient Name</th>
+            <th>Mobile No.</th>
+            <th>Appointment Data Time</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let apt of appointmentList; let i = index">
+            <td>{{apt.patientId}}</td>
+            <td>{{apt.patientName}}</td>
+            <td>{{apt.patientMobile}}</td>
+            <td>{{apt?.dateTime | date:'medium'}}</td>
+            <td>{{apt.status}}</td>
+            <td>
+                <button class="btn btn-sm btn-primary" (click)="editAppointment(apt)"> Edit</button>
+            </td>
+          </tr>
+          <tr *ngIf="appointmentList.lenght == 0">
+              <td> No Data Found. </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

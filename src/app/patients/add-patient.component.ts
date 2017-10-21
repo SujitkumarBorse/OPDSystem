@@ -1,7 +1,7 @@
 import { PatientService } from '../services/patient/patient.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-patient',
@@ -22,10 +22,14 @@ export class AddPatientComponent implements OnInit {
   }
 
   savePatient() {
-    this.patientService.save( this.patientForm.getRawValue()).subscribe((response) => {
-      console.log("After patient save : ", response);
-      this.router.navigate(['app/patient']);
-    });
+    if ( this.patientForm.dirty && this.patientForm.valid ){
+      this.patientService.save( this.patientForm.getRawValue()).subscribe((response) => {
+        console.log("After patient save : ", response);
+        this.router.navigate(['app/patient']);
+      });
+    } else {
+      alert("Please enter valid data.");
+    }
   }
 
   ngOnInit() {
@@ -35,6 +39,10 @@ export class AddPatientComponent implements OnInit {
       'lastName': new FormControl('', Validators.required),
       'gender': new FormControl('', Validators.required),
       'dob': new FormControl('', Validators.required),
+      'contact': this.formBuilder.group({
+        'mobile': new FormControl('', Validators.required),
+        'email': new FormControl('', Validators.required)
+      }),
       'address': this.formBuilder.group({
         "address": new FormControl('', Validators.required),
         "city": new FormControl('', Validators.required),

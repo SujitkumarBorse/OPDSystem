@@ -12,7 +12,7 @@ export class PatientService {
         return this.http.get(this.createUserUrl, this.jwt()).map((response: Response) => response.json());
     }
 
-    getById(id: number) {
+    getById(id: any) {
         return this.http.get(this.createUserUrl + '/' + id, this.jwt()).map((response: Response) => response.json());
     }
 

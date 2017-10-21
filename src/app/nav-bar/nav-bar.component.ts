@@ -26,6 +26,10 @@ export class NavBarComponent implements OnInit, OnChanges {
 
   logout() {
     this.authService.logout();
+    var myElement = document.getElementsByClassName("modal-backdrop fade show");
+    while(myElement.length > 0){
+      myElement[0].classList.remove('modal-backdrop');
+    }
     this.router.navigate(['/login']);
   }
 
