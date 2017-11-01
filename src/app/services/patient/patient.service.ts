@@ -8,8 +8,12 @@ export class PatientService {
 
     constructor(private http: Http) { }
 
-    getAll() {
-        return this.http.get(this.createUserUrl, this.jwt()).map((response: Response) => response.json());
+    getAll(doctorId?:any) {
+        let url = this.createUserUrl;
+        if(doctorId){
+            url = url + '?filter='+ JSON.stringify({"doctorId": doctorId});
+        }
+        return this.http.get(url, this.jwt()).map((response: Response) => response.json());
     }
 
     getById(id: any) {

@@ -2,6 +2,7 @@ import { Response } from '_debugger';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService } from '../services/patient/patient.service';
+import { AuthenticationService } from '../services/authentication/authentication.service';
 
 @Component({
   selector: 'app-patients',
@@ -10,14 +11,18 @@ import { PatientService } from '../services/patient/patient.service';
 })
 export class PatientsComponent implements OnInit {
   patientList = [];
-  constructor(private router: Router, private route: ActivatedRoute, private patientService: PatientService) { }
+  constructor(private router: Router, private route: ActivatedRoute,
+     private patientService: PatientService,
+     private authService: AuthenticationService) { }
 
   addPatient() {
     this.router.navigate(['app/patient/add']);
   }
 
   ngOnInit() {
-    this.patientService.getAll().subscribe((response) => {
+    
+    const user = this.authService.getUser();
+    this.patientService.getAll(user._id).subscribe((response) => {
       if(response.status === 'fail'){
         alert(response.message);
       }
