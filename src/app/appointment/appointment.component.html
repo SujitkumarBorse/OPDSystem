@@ -52,6 +52,7 @@
             <th>Patient Name</th>
             <th>Mobile No.</th>
             <th>Appointment Data Time</th>
+            <th>Amount Paid</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
@@ -62,6 +63,7 @@
             <td>{{apt.patientName}}</td>
             <td>{{apt.patientMobile}}</td>
             <td>{{apt?.dateTime | date:'medium'}}</td>
+            <td>{{apt.amountPaid || '-'}}</td>
             <td>{{apt.status | uppercase}}</td>
             <td>
                 <button class="btn btn-sm btn-primary" (click)="editAppointment(apt)"> Edit</button>
