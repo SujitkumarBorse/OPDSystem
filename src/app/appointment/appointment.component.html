@@ -1,4 +1,4 @@
-<div class="card mb-3">
+<div class="card mb-3 card-height">
   <div class="card-header">
     <i class="fa fa-table"></i>
     <b *ngIf="isAddPage">Create</b>
@@ -20,17 +20,23 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 mb-md">
+          <div class="col-md-4 mb-md">
+              <label for="">Status</label>
             <select class="form-control" [(ngModel)]="appointmentModel.status">
               <option *ngFor="let title of statusList" [value]="title.id">{{title.name}}</option>
             </select>
           </div>
-          <div class="col-md-6 mb-md">
+          <div class="col-md-3 mb-md" *ngIf="appointmentModel.status === 'completed'">
+              <label for="">Amount Paid</label>
+              <input type="number" class="form-control" [(ngModel)]="appointmentModel.amountPaid" placeholder="Amount paid by patient">
+          </div>
+          <div class="col-md-5 mb-md">
+            <label for="">Date And Time</label>
             <date-picker mode="datetime" [(ngModel)]="appointmentModel.dateTime"></date-picker>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12 mb-md text-center">
+          <div class="col-md-12 mb-md">
             <button class="btn btn-primary" (click)="bookAppointment()"> Save/Update Appointment</button>
             <button class="btn btn-default" (click)="cancel()"> Cancel </button>
           </div>
@@ -56,7 +62,7 @@
             <td>{{apt.patientName}}</td>
             <td>{{apt.patientMobile}}</td>
             <td>{{apt?.dateTime | date:'medium'}}</td>
-            <td>{{apt.status}}</td>
+            <td>{{apt.status | uppercase}}</td>
             <td>
                 <button class="btn btn-sm btn-primary" (click)="editAppointment(apt)"> Edit</button>
             </td>

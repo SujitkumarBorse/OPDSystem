@@ -4,9 +4,9 @@ import { UserService } from '../services/user/user.service';
 import { AlertService } from '../services/alert/alert.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css']
 })
 
 
@@ -25,23 +25,25 @@ export class RegisterComponent {
 
         console.log("Data to register user : ", this.model);
 
-        if(this.model.email && this.model.firstName && this.model.medicalRegistrationNo && this.model.password && this.model.confirmPassword){
+        if (this.model.email && this.model.firstName && this.model.medicalRegistrationNo && this.model.password && this.model.confirmPassword) {
+
+            if (this.model.password !== this.model.confirmPassword) {
+                alert("Confirm password does not match.");
+                return;
+            }
             this.userService.create(this.model)
                 .subscribe(
-                    data => {
-                        this.alertService.success('Registration successful', true);
-                        this.router.navigate(['/login']);
-                    },
-                    error => {
-                        this.alertService.error(error);
-                        this.loading = false;
-                    });
-        }else {
+                data => {
+                    this.alertService.success('Registration successful', true);
+                    this.router.navigate(['/login']);
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
+        } else {
             alert("Please enter all mandatory fields.");
         }
 
-        if(this.model.password !== this.model.confirmPassword){
-            alert("Confirm password does not match.");
-        }
     }
 }

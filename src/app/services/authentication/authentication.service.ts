@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/map'
+import { Router } from '@angular/router';
 
 
 @Injectable()
@@ -12,8 +13,8 @@ export class AuthenticationService {
     apiRegistrationUrl = 'http://localhost:9000/opd-api/v1/users';
     apiLoginUrl = 'http://localhost:9000/opd-api/v1/users/login';
     jwtHelper: JwtHelper = new JwtHelper();
-    
-    constructor(private http: HttpClient) { }
+
+    constructor(private http: HttpClient, private router: Router) { }
 
     login(username: string, password: string) {
         return this.http.post(this.apiLoginUrl, { email: username, password: password });
@@ -25,14 +26,20 @@ export class AuthenticationService {
     }
 
     isLoggedIn() {
-      // remove user from local storage to log user out
-      const d = JSON.parse(localStorage.getItem('currentUser'));
-      return !!d;
+        // remove user from local storage to log user out
+        const d = JSON.parse(localStorage.getItem('currentUser'));
+        return !!d;
     }
 
     getUser() {
         const token = JSON.parse(localStorage.getItem('currentUser'));
-        return this.jwtHelper.decodeToken(token);
+        if (token) {
+            return this.jwtHelper.decodeToken(token);
+        } else {
+            alert("Toekn expired. Please login again.");
+            this.router.navigate(['app/login']);
+        }
+
     }
 
 }

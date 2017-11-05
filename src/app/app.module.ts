@@ -28,7 +28,7 @@ import { BillingComponent } from './billing/billing.component';
 import { AccountComponent } from './account/account.component';
 import { ClinicTestComponent } from './clinic-test/clinic-test.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { FilterPipe} from './utils/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BillingComponent,
     AccountComponent,
     ClinicTestComponent,
-    DashboardComponent
+    DashboardComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

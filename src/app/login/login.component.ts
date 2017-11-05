@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
                 if (user && user['status'] == 'success' && user['token']) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user['token']));
-                    this.router.navigate(['/app/home']);
+                    this.router.navigate(['/app/patient']);
                 } else {
                     this.alertService.error(user['message']);
                     this.error = user['message'];

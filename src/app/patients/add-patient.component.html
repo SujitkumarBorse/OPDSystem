@@ -7,7 +7,7 @@
 </div>
 <div class="row  mb-md">
   <div class="col-md-12">
-    <div class="container">
+    <div class="container mb-lg">
       <form [formGroup]="patientForm" (ngSubmit)="savePatient()">
         <div class="row">
           <div class="col-md-4">
@@ -33,15 +33,15 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <div class="form-group">
-              <label for="grnder">Gender : </label>
-              <label for="m">Male
-                <input type="radio" name="gender" value="male" id="male" class="form-control" formControlName="gender" />
-              </label>
-              <label for="f">Female
-                <input type="radio" name="gender" value="female" id="female" class="form-control" formControlName="gender" />
-              </label>
-              <p class="help-block" *ngIf="!patientForm.get('gender').valid && patientForm.get('gender').touched">Gender is required</p>
+            <div class="mt-md">
+            <label for="grnder">Gender : </label>
+            <label class="radio-inline">
+              <input type="radio" name="gender" class="input-mg" value="male" id="male" formControlName="gender" />Male
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="gender" class="input-mg" value="female" id="female" formControlName="gender" />Female
+            </label>
+            <p class="help-block" *ngIf="!patientForm.get('gender').valid && patientForm.get('gender').touched">Gender is required</p>
             </div>
           </div>
           <div class="col-md-4">
@@ -53,20 +53,20 @@
           </div>
         </div>
         <div class="row" formGroupName="contact">
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="mobile">Mobile * : </label>
-                  <input type="text" name="mobile" class="form-control" formControlName="mobile" />
-                  <p class="help-block" *ngIf="!patientForm.get('contact.mobile').valid && patientForm.get('contact.mobile').touched">Mobile Number is required</p>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="email">Email : </label>
-                <input type="email" name="email" class="form-control" formControlName="email" />
-              </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="mobile">Mobile * : </label>
+              <input type="text" name="mobile" class="form-control" formControlName="mobile" />
+              <p class="help-block" *ngIf="!patientForm.get('contact.mobile').valid && patientForm.get('contact.mobile').touched">Mobile Number is required</p>
             </div>
           </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="email">Email : </label>
+              <input type="email" name="email" class="form-control" formControlName="email" />
+            </div>
+          </div>
+        </div>
         <div formGroupName="address">
 
           <div class="row">
@@ -98,6 +98,7 @@
           <div class="col-md-12">
             <div class="form-group">
               <button class="btn btn-primary" type="Submit" [disabled]="!patientForm.valid">Submit</button>
+              <button class="btn btn-default" (click)="cancel()"> Cancel </button>
             </div>
           </div>
         </div>

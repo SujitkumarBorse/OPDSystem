@@ -17,7 +17,8 @@ export class AppointmentComponent implements OnInit {
   appointmentModel = {
     patientId: '',
     dateTime: '',
-    status: ''
+    status: '',
+    amountPaid: ''
   };
   patientDetails = {};
   patientId = "";
@@ -52,15 +53,23 @@ export class AppointmentComponent implements OnInit {
     this.appointmentModel = {
       patientId: '',
       dateTime: '',
-      status: ''
+      status: '',
+      amountPaid: ''
     };
+    this.isAddPage = false;
   }
 
   editAppointment(data) {
-    // this.appointmentModel.dateTime = moment(new Date(this.appointmentModel.dateTime)).utc().format("YYYY-MM-DD HH:mm a")
     this.appointmentModel = data;
+    // this.appointmentModel.dateTime = moment(data.dateTime).format("MMMM D, YYYY HH:mm A")
+    this.patientId = this.appointmentModel.patientId;
+    this.getPatientData();
+    this.isAddPage = true;
   }
 
+  // getDate(d){
+  //   return (d && typeof(d) === 'string') ? moment(d).format("MMMM D, YYYY HH:mm A") : d;
+  // }
 
 
   bookAppointment() {
@@ -72,8 +81,10 @@ export class AppointmentComponent implements OnInit {
           this.appointmentModel = {
             patientId: '',
             dateTime: '',
-            status: ''
+            status: '',
+            amountPaid: ''
           };
+          this.isAddPage = false;
         });
       } else {
         this.appointmentModel.patientId = this.patientId;
@@ -83,8 +94,10 @@ export class AppointmentComponent implements OnInit {
           this.appointmentModel = {
             patientId: '',
             dateTime: '',
-            status: ''
+            status: '',
+            amountPaid: ''
           };
+          this.isAddPage = false;
         });
       }
     } else {
@@ -92,15 +105,24 @@ export class AppointmentComponent implements OnInit {
     }
   }
 
+  getPatientData() {
+    this.patientService.getById(this.patientId).subscribe((response) => {
+      console.log("After patient save : ", response);
+      if (response && response.status === 'fail') {
+        alert(response.message);
+        this.router.navigate(['app/login']);
+      } else {
+        this.patientDetails = response;
+      }
+    });
+  }
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.patientId = params['id'];
       if (this.patientId) {
         this.isAddPage = true;
-        this.patientService.getById(this.patientId).subscribe((response) => {
-          console.log("After patient save : ", response);
-          this.patientDetails = response;
-        });
+        this.getPatientData();
       }
     });
 
@@ -108,15 +130,21 @@ export class AppointmentComponent implements OnInit {
     this.appointmentService.getAll().subscribe((response) => {
       console.log("Appointment List : ", response);
 
-      response.forEach((element, idx, array) => {
-        this.patientService.getById(element.patientId).subscribe((data) => {
-          element.patientName = data.firstName + ' ' + data.lastName;
-          element.patientMobile = data.contact.mobile;
+      if (response && response.status === 'fail') {
+        alert(response.message);
+        this.router.navigate(['app/login']);
+      } else {
+        response.forEach((element, idx, array) => {
+          this.patientService.getById(element.patientId).subscribe((data) => {
+            element.patientName = data.firstName + ' ' + data.lastName;
+            element.patientMobile = data.contact.mobile;
+          });
+          if (idx === response.length - 1) {
+            this.appointmentList = response;
+          }
         });
-        if (idx === response.length - 1) {
-          this.appointmentList = response;
-        }
-      });
+      }
+
     });
 
   }

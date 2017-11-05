@@ -1,3 +1,71 @@
-<p>
-  account works!
-</p>
+<div class="card card-height">
+  <div class="card-header">
+    <b>Account Details</b>
+  </div>
+  <div class="card-body">
+    <form name="form" (ngSubmit)="f.form.valid && updateAccountInfo()" #f="ngForm" novalidate>
+      <div class="row">
+        <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+          <label for="firstName">First Name : </label>
+          <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
+          <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
+        </div>
+
+        <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+          <label for="lastName">Last Name : </label>
+          <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
+          <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+          <label for="email">Email : </label>
+          <input type="email" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required email/>
+          <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+        </div>
+
+        <div class="form-group col-md-6" style="margin: auto;" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+          <label for="grnder">Gender : </label>
+          <input type="radio" name="gender" value="male" id="m" [(ngModel)]="model.gender" #gender="ngModel" required />
+          <label for="m">Male</label>
+          <input type="radio" name="gender" value="female" id="f" [(ngModel)]="model.gender" #gender="ngModel" required />
+          <label for="f">Female</label>
+          <div *ngIf="f.submitted && !gender.valid" class="help-block">Gender is required</div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="form-group col-md-12" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+          <label for="medicalRegistrationNumber">Medical Registretion Number : </label>
+          <input type="text" class="form-control" name="medicalRegistrationNumber" [(ngModel)]="model.medicalRegistrationNo" #medicalRegistrationNumber="ngModel"
+            required />
+          <div *ngIf="f.submitted && !medicalRegistrationNumber.valid" class="help-block">Medical Registration Number is required</div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+          <label for="password">Password : </label>
+          <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel"/>
+        </div>
+
+        <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+          <label for="confirmPassword">Confirm Password : </label>
+          <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="model.confirmPassword" #confirmPassword="ngModel" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <button [disabled]="loading" class="btn btn-primary">Update Account</button>
+          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+          />
+          <a [routerLink]="['/app/patient']" class="btn btn-link">Cancel</a>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

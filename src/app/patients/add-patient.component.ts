@@ -19,7 +19,7 @@ export class AddPatientComponent implements OnInit {
     private patientService: PatientService,
     private authService: AuthenticationService) { }
 
-  clear() {
+  cancel() {
     this.router.navigate(['app/patient']);
   }
 

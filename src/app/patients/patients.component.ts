@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService } from '../services/patient/patient.service';
 import { AuthenticationService } from '../services/authentication/authentication.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-patients',
@@ -10,6 +11,11 @@ import { AuthenticationService } from '../services/authentication/authentication
   styleUrls: ['./patients.component.css']
 })
 export class PatientsComponent implements OnInit {
+
+  searchText ="";
+  totalPatients = 0;
+  todaysAppointment = 0;
+  whatTime = Observable.interval(1000).map(x => new Date()).share();
   patientList = [];
   constructor(private router: Router, private route: ActivatedRoute,
      private patientService: PatientService,
@@ -27,6 +33,7 @@ export class PatientsComponent implements OnInit {
         alert(response.message);
       }
       this.patientList = response;
+      this.totalPatients = this.patientList.length;
     });
   }
 

@@ -19,7 +19,7 @@ const appRoutes: Routes = [
     {
         path: 'app', component: DashboardComponent,
         children: [
-            { path: 'home', component: HomeComponent },
+            // { path: 'home', component: HomeComponent },
             { path: 'patient', component: PatientsComponent },
             { path: 'patient/add', component: AddPatientComponent },
             { path: 'appointment', component: AppointmentComponent },
