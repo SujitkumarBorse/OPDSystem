@@ -18,7 +18,7 @@ export class UserService {
     }
 
     create(user: any) {
-        return this.http.post(this.createUserUrl+ '/', user, this.jwt()).map((response: Response) => response.json());
+        return this.http.post(this.createUserUrl, user, this.jwt()).map((response: Response) => response.json());
     }
 
     update(user: any) {

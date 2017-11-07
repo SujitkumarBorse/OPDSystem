@@ -23,9 +23,26 @@ export class AddPatientComponent implements OnInit {
     this.router.navigate(['app/patient']);
   }
 
+
+ validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return !re.test(email);
+}
+
   savePatient() {
+
+
+    
     if ( this.patientForm.dirty && this.patientForm.valid ){
+    
       let data = this.patientForm.getRawValue();
+      if(this.validateEmail(data.contact.email)){
+        alert("Please enter valid email id.");
+        return;
+      }
+
+
+
       const user = this.authService.getUser();
       data.doctorId = user._id;
       this.patientService.save(data).subscribe((response) => {

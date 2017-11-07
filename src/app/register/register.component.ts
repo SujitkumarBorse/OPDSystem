@@ -27,6 +27,12 @@ export class RegisterComponent {
 
         if (this.model.email && this.model.firstName && this.model.medicalRegistrationNo && this.model.password && this.model.confirmPassword) {
 
+
+            if(this.validateEmail(this.model.email)){
+                alert("Please enter valid email id.");
+                return;
+              }
+
             if (this.model.password !== this.model.confirmPassword) {
                 alert("Confirm password does not match.");
                 return;
@@ -54,5 +60,11 @@ export class RegisterComponent {
             event.preventDefault();
         }
     }
+
+    validateEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return !re.test(email);
+    }
+    
 
 }

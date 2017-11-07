@@ -26,6 +26,14 @@ export class AccountComponent implements OnInit {
     this.model = this.authService.getUser();
   }
 
+  keyPressChar(event: any) {
+    const pattern = /[a-zA-Z\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+        event.preventDefault();
+    }
+}
+
   updateAccountInfo() {
     this.loading = true;
     console.log("Data to register user : ", this.model);
