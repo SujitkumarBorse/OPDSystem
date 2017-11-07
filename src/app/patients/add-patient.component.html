@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <label for="name">First Name * : </label>
+              <label for="name"><span class="required">* </span> Name : </label>
               <input type="text" formControlName="firstName" class="form-control">
             </div>
             <p class="help-block" *ngIf="!patientForm.get('firstName').valid && patientForm.get('firstName').touched">Please enter first name.</p>
@@ -25,7 +25,7 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label for="name">Last Name * : </label>
+              <label for="name"><span class="required">* </span>Last Name : </label>
               <input type="text" formControlName="lastName" class="form-control">
             </div>
             <p class="help-block" *ngIf="!patientForm.get('lastName').valid && patientForm.get('lastName').touched">Please enter last name.</p>
@@ -34,7 +34,7 @@
         <div class="row">
           <div class="col-md-4">
             <div class="mt-md">
-            <label for="grnder">Gender : </label>
+            <label for="grnder"><span class="required">* </span>Gender : </label>
             <label class="radio-inline">
               <input type="radio" name="gender" class="input-mg" value="male" id="male" formControlName="gender" />Male
             </label>
@@ -55,8 +55,8 @@
         <div class="row" formGroupName="contact">
           <div class="col-md-4">
             <div class="form-group">
-              <label for="mobile">Mobile * : </label>
-              <input type="text" name="mobile" class="form-control" formControlName="mobile" />
+              <label for="mobile"><span class="required">* </span>Mobile : </label>
+              <input type="number" max="10" name="mobile" class="form-control" formControlName="mobile" />
               <p class="help-block" *ngIf="!patientForm.get('contact.mobile').valid && patientForm.get('contact.mobile').touched">Mobile Number is required</p>
             </div>
           </div>
@@ -97,7 +97,7 @@
         <div class="row mt-md">
           <div class="col-md-12">
             <div class="form-group">
-              <button class="btn btn-primary" type="Submit" [disabled]="!patientForm.valid">Submit</button>
+              <button class="btn btn-primary" type="Submit">Submit</button>
               <button class="btn btn-default" (click)="cancel()"> Cancel </button>
             </div>
           </div>

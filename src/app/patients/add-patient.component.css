@@ -7,3 +7,6 @@
 .mb-lg{
     margin-bottom: 100px;
 }
+.required {
+    color: red;
+}

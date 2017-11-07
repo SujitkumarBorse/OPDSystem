@@ -30,7 +30,7 @@ export class AccountComponent implements OnInit {
     this.loading = true;
     console.log("Data to register user : ", this.model);
 
-    if (this.model.email && this.model.firstName && this.model.medicalRegistrationNo) {
+    if (this.model.email && this.model.firstName && this.model.lastName && this.model.gender && this.model.medicalRegistrationNo) {
       this.userService.update(this.model).subscribe(
         data => {
           if (data && data.status === 'fail') {
@@ -47,7 +47,7 @@ export class AccountComponent implements OnInit {
           this.loading = false;
         });
     } else {
-      alert("Please enter all mandatory fields.");
+      alert("Please enter all mandatory fields marked with *.");
     }
 
 
@@ -56,7 +56,7 @@ export class AccountComponent implements OnInit {
   changePassword() {
 
     if (!this.passwordModel.currentPassword || !this.passwordModel.newPassword || !this.passwordModel.confirmPassword) {
-      alert("Please enter all fields required to change password;");
+      alert("Please enter all mandatory fields marked with *.");
       return;
     }
     if (this.passwordModel.newPassword !== this.passwordModel.confirmPassword) {

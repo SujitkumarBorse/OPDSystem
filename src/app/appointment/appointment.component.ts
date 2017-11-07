@@ -61,16 +61,11 @@ export class AppointmentComponent implements OnInit {
 
   editAppointment(data) {
     this.appointmentModel = data;
-    // this.appointmentModel.dateTime = moment(data.dateTime).format("MMMM D, YYYY HH:mm A")
+    this.appointmentModel.dateTime = moment(data.dateTime).format("MMMM D, YYYY h:mm A");
     this.patientId = this.appointmentModel.patientId;
     this.getPatientData();
     this.isAddPage = true;
   }
-
-  // getDate(d){
-  //   return (d && typeof(d) === 'string') ? moment(d).format("MMMM D, YYYY HH:mm A") : d;
-  // }
-
 
   bookAppointment() {
     if (this.appointmentModel.dateTime && this.appointmentModel.status) {
@@ -101,7 +96,7 @@ export class AppointmentComponent implements OnInit {
         });
       }
     } else {
-      alert("Please enter valid data.");
+      alert("Please enter mandatory data marked with *.");
     }
   }
 

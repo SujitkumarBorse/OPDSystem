@@ -10,28 +10,31 @@
       <div class="col-md-12">
         <div class="row">
           <div class="col-md-4">
+              <label for="">Patient First Name</label>
             <label class="form-control">{{patientDetails.firstName}}</label>
           </div>
           <div class="col-md-4">
+              <label for="">Patient Last Name</label>
             <label class="form-control"> {{patientDetails.lastName}}</label>
           </div>
           <div class="col-md-4">
+              <label for="">Patient Mobile Number</label>
             <label class="form-control">{{patientDetails?.contact?.mobile}}</label>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4 mb-md">
-              <label for="">Status</label>
+              <label for=""><span class="required">* </span>Status</label>
             <select class="form-control" [(ngModel)]="appointmentModel.status">
               <option *ngFor="let title of statusList" [value]="title.id">{{title.name}}</option>
             </select>
           </div>
           <div class="col-md-3 mb-md" *ngIf="appointmentModel.status === 'completed'">
-              <label for="">Amount Paid</label>
+              <label for="">Amount Paid(INR)</label>
               <input type="number" class="form-control" [(ngModel)]="appointmentModel.amountPaid" placeholder="Amount paid by patient">
           </div>
           <div class="col-md-5 mb-md">
-            <label for="">Date And Time</label>
+            <label for=""><span class="required">* </span>Date And Time</label>
             <date-picker mode="datetime" [(ngModel)]="appointmentModel.dateTime"></date-picker>
           </div>
         </div>

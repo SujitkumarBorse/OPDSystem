@@ -6,13 +6,13 @@
     <form name="form" (ngSubmit)="f.form.valid && updateAccountInfo()" #f="ngForm" novalidate>
       <div class="row">
         <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
-          <label for="firstName">First Name : </label>
+          <label for="firstName"><span class="required">* </span>First Name : </label>
           <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
           <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
         </div>
 
         <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
-          <label for="lastName">Last Name : </label>
+          <label for="lastName"><span class="required">* </span>Last Name : </label>
           <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
           <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
         </div>
@@ -20,13 +20,12 @@
       <div class="row">
 
         <div class="form-group col-md-6" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
-          <label for="email">Email : </label>
+          <label for="email"><span class="required">* </span>Email : </label>
           <input type="email" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required email disabled/>
-          <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
         </div>
 
         <div class="form-group col-md-6" style="margin: auto;" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
-          <label for="grnder">Gender : </label>
+          <label for="grnder"><span class="required">* </span>Gender : </label>
           <input type="radio" name="gender" value="male" id="m" [(ngModel)]="model.gender" #gender="ngModel" required />
           <label for="m">Male</label>
           <input type="radio" name="gender" value="female" id="f" [(ngModel)]="model.gender" #gender="ngModel" required />
@@ -38,7 +37,7 @@
       <div class="row">
 
         <div class="form-group col-md-4" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
-          <label for="medicalRegistrationNumber">Medical Registretion Number : </label>
+          <label for="medicalRegistrationNumber"><span class="required">* </span>Medical Registretion Number : </label>
           <input type="text" class="form-control" name="medicalRegistrationNumber" [(ngModel)]="model.medicalRegistrationNo" #medicalRegistrationNumber="ngModel"
             required />
           <div *ngIf="f.submitted && !medicalRegistrationNumber.valid" class="help-block">Medical Registration Number is required</div>
@@ -64,15 +63,15 @@
   <div class="card-body">
     <div class="row">
         <div class="form-group col-md-4">
-            <label for="password">Current Password * : </label>
+            <label for="password"><span class="required">* </span>Current Password : </label>
             <input type="password" class="form-control" name="currentPassword" [(ngModel)]="passwordModel.currentPassword" />
           </div>
       <div class="form-group col-md-4">
-        <label for="password">Password * : </label>
+        <label for="password"><span class="required">* </span>Password : </label>
         <input type="password" class="form-control" name="password" [(ngModel)]="passwordModel.newPassword" />
       </div>
       <div class="form-group col-md-4">
-        <label for="confirmPassword">Confirm Password * : </label>
+        <label for="confirmPassword"><span class="required">* </span>Confirm Password : </label>
         <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="passwordModel.confirmPassword" />
       </div>
     </div>

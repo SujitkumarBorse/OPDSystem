@@ -24,8 +24,7 @@ export class AddPatientComponent implements OnInit {
   }
 
   savePatient() {
-    if ( this.patientForm.dirty && this.patientForm.valid ){    
-     
+    if ( this.patientForm.dirty && this.patientForm.valid ){
       let data = this.patientForm.getRawValue();
       const user = this.authService.getUser();
       data.doctorId = user._id;
@@ -34,7 +33,7 @@ export class AddPatientComponent implements OnInit {
         this.router.navigate(['app/patient']);
       });
     } else {
-      alert("Please enter valid data.");
+      alert("Please enter mandatory fields marked with *.");
     }
   }
 
@@ -44,16 +43,16 @@ export class AddPatientComponent implements OnInit {
       'middleName': new FormControl(''),
       'lastName': new FormControl('', Validators.required),
       'gender': new FormControl('', Validators.required),
-      'dob': new FormControl('', Validators.required),
+      'dob': new FormControl(''),
       'contact': this.formBuilder.group({
         'mobile': new FormControl('', Validators.required),
-        'email': new FormControl('', Validators.required)
+        'email': new FormControl('')
       }),
       'address': this.formBuilder.group({
-        "address": new FormControl('', Validators.required),
-        "city": new FormControl('', Validators.required),
-        "state": new FormControl('', Validators.required),
-        "country": new FormControl('', Validators.required),
+        "address": new FormControl(''),
+        "city": new FormControl(''),
+        "state": new FormControl(''),
+        "country": new FormControl('India'),
         "zip": new FormControl('')
       })
     });

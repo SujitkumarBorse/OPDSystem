@@ -1,3 +1,6 @@
 .card-height {
     min-height: 40rem;
 }
+.required {
+    color: red;
+}

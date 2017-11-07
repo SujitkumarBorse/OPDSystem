@@ -31,6 +31,7 @@ export class PatientsComponent implements OnInit {
     this.patientService.getAll(user._id).subscribe((response) => {
       if(response.status === 'fail'){
         alert(response.message);
+        this.router.navigate(['app/login']);
       }
       this.patientList = response;
       this.totalPatients = this.patientList.length;
