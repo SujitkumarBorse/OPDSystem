@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { BillingService } from '../services/billing/billing.service';
+import { AuthenticationService } from '../services/authentication/authentication.service';
 
 @Component({
   selector: 'app-appointment',
@@ -14,11 +16,13 @@ import * as moment from 'moment';
 
 export class AppointmentComponent implements OnInit {
 
+  doctorUser: any;
   appointmentModel = {
     patientId: '',
     dateTime: '',
     status: '',
-    amountPaid: ''
+    amountPaid: '',
+    doctorId: ''
   };
   patientDetails = {};
   patientId = "";
@@ -43,10 +47,38 @@ export class AppointmentComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private patientService: PatientService,
-    private appointmentService: AppointmentService) { }
+    private appointmentService: AppointmentService,
+    private billingService: BillingService,
+    private authService: AuthenticationService) { }
 
   clear() {
     this.router.navigate(['app/appointment']);
+  }
+
+  createBill(apt) {
+    if (apt && apt.amountPaid) {
+      const data = {
+        "patientId": apt.patientId,
+        "patientName": apt.patientName,
+        "appointmentId": apt._id,
+        "amount": apt.amountPaid,
+        "doctorId": this.doctorUser._id
+      }
+      this.billingService.save(data).subscribe((response) => {
+
+        if (response && response.status === 'fail') {
+          alert(response.message);
+          this.router.navigate(['app/login']);
+        } else {
+          alert('Bill created successfully.');
+          this.router.navigate(['app/bill']);
+        }
+
+      });
+    } else {
+      alert("Bill amount not added.Please fill bill amount.");
+    }
+
   }
 
   cancel() {
@@ -54,7 +86,8 @@ export class AppointmentComponent implements OnInit {
       patientId: '',
       dateTime: '',
       status: '',
-      amountPaid: ''
+      amountPaid: '',
+      doctorId: ''
     };
     this.isAddPage = false;
   }
@@ -69,30 +102,49 @@ export class AppointmentComponent implements OnInit {
 
   bookAppointment() {
     if (this.appointmentModel.dateTime && this.appointmentModel.status) {
+
+      if (!moment(this.appointmentModel.dateTime).isValid()) {
+        alert("Please enter valid date");
+        return;
+      }
       if (this.appointmentModel['_id']) {
         this.appointmentService.update(this.appointmentModel).subscribe((response) => {
           console.log("After appointment save : ", response);
-          this.ngOnInit();
-          this.appointmentModel = {
-            patientId: '',
-            dateTime: '',
-            status: '',
-            amountPaid: ''
-          };
-          this.isAddPage = false;
+          if (response && response.status === 'fail') {
+            alert(response.message);
+            this.router.navigate(['app/login']);
+          } else {
+            this.ngOnInit();
+            this.appointmentModel = {
+              patientId: '',
+              dateTime: '',
+              status: '',
+              amountPaid: '',
+              doctorId: ''
+            };
+            this.isAddPage = false;
+          }
         });
       } else {
         this.appointmentModel.patientId = this.patientId;
+        this.appointmentModel.doctorId = this.doctorUser._id
         this.appointmentService.save(this.appointmentModel).subscribe((response) => {
-          console.log("After appointment save : ", response);
-          this.ngOnInit();
-          this.appointmentModel = {
-            patientId: '',
-            dateTime: '',
-            status: '',
-            amountPaid: ''
-          };
-          this.isAddPage = false;
+
+          if (response && response.status === 'fail') {
+            alert(response.message);
+            this.router.navigate(['app/login']);
+          } else {
+            console.log("After appointment save : ", response);
+            this.ngOnInit();
+            this.appointmentModel = {
+              patientId: '',
+              dateTime: '',
+              status: '',
+              amountPaid: '',
+              doctorId: ''
+            };
+            this.isAddPage = false;
+          }
         });
       }
     } else {
@@ -113,6 +165,7 @@ export class AppointmentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.doctorUser = this.authService.getUser();
     this.route.params.subscribe(params => {
       this.patientId = params['id'];
       if (this.patientId) {
@@ -122,7 +175,7 @@ export class AppointmentComponent implements OnInit {
     });
 
     // Get list of all appointments
-    this.appointmentService.getAll().subscribe((response) => {
+    this.appointmentService.getAll({"doctorId": this.doctorUser._id}).subscribe((response) => {
       console.log("Appointment List : ", response);
 
       if (response && response.status === 'fail') {

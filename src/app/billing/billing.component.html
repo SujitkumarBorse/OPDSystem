@@ -1,3 +1,37 @@
-<div class="text-center" style="height:40rem;">
-  <h3 style="margin-top:3rem;">Billing infomation - Future enhancement</h3>
+<div class="card mb-3 card-height">
+  <div class="card-header">
+    <i class="fa fa-table"></i>
+    <b> Bill Information </b>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive" id="print-section">
+      <table class="table table-bordered" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Appointment Id</th>
+            <th>Patient Id</th>
+            <th>Patient Name</th>
+             <th>Bill Date Time</th>
+            <th>Amount Paid</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bill of billList; let i = index">
+            <td>{{bill.appointmentId}}</td>
+            <td>{{bill.patientId}}</td>
+            <td>{{bill.patientName}}</td>
+            <td>{{bill?.createdAt | date:'medium'}}</td>
+            <td>{{bill.amount || '-'}}</td>
+            <td>
+              <button class="btn btn-sm btn-primary" (click)="printBill(bill)">Print Bill</button>
+            </td>
+          </tr>
+          <tr *ngIf="billList.lenght == 0">
+            <td> No Data Found. </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

@@ -30,7 +30,7 @@
             </select>
           </div>
           <div class="col-md-3 mb-md" *ngIf="appointmentModel.status === 'completed'">
-              <label for="">Amount Paid(INR)</label>
+              <label for=""><span class="required">* </span>Amount Paid (Rs.)</label>
               <input type="number" class="form-control" [(ngModel)]="appointmentModel.amountPaid" placeholder="Amount paid by patient">
           </div>
           <div class="col-md-5 mb-md">
@@ -51,10 +51,11 @@
       <table class="table table-bordered" width="100%" cellspacing="0">
         <thead>
           <tr>
+              <th>Appointment Id</th>
             <th>Patient Id</th>
             <th>Patient Name</th>
             <th>Mobile No.</th>
-            <th>Appointment Data Time</th>
+            <th>Appointment Date Time</th>
             <th>Amount Paid</th>
             <th>Status</th>
             <th>Action</th>
@@ -62,6 +63,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let apt of appointmentList; let i = index">
+              <td>{{apt._id}}</td>
             <td>{{apt.patientId}}</td>
             <td>{{apt.patientName}}</td>
             <td>{{apt.patientMobile}}</td>
@@ -69,7 +71,8 @@
             <td>{{apt.amountPaid || '-'}}</td>
             <td>{{apt.status | uppercase}}</td>
             <td>
-                <button class="btn btn-sm btn-primary" (click)="editAppointment(apt)"> Edit</button>
+                <button class="btn btn-sm btn-primary" (click)="editAppointment(apt)" *ngIf="apt.status !=='completed'"> Edit</button>
+                <button class="btn btn-sm btn-primary" (click)="createBill(apt)" *ngIf="apt.status ==='completed'"> Create Bill</button>
             </td>
           </tr>
           <tr *ngIf="appointmentList.lenght == 0">

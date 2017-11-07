@@ -8,8 +8,12 @@ export class AppointmentService {
 
   constructor(private http: Http) { }
 
-  getAll() {
-    return this.http.get(this.createUserUrl, this.jwt()).map((response: Response) => response.json());
+  getAll(filter? : any) {
+    if(filter){
+      return this.http.get(this.createUserUrl+'?filter='+JSON.stringify(filter), this.jwt()).map((response: Response) => response.json());
+    } else {
+      return this.http.get(this.createUserUrl, this.jwt()).map((response: Response) => response.json());
+    }
   }
 
   getById(id: number) {

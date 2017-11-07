@@ -12,21 +12,21 @@
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <label for="name"><span class="required">* </span> Name : </label>
-              <input type="text" formControlName="firstName" class="form-control">
+              <label for="name"><span class="required">* </span> First Name : </label>
+              <input type="text" formControlName="firstName" class="form-control" (keypress)="keyPressChar($event)">
             </div>
             <p class="help-block" *ngIf="!patientForm.get('firstName').valid && patientForm.get('firstName').touched">Please enter first name.</p>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="name">Middle Name: </label>
-              <input type="text" formControlName="middleName" class="form-control">
+              <input type="text" formControlName="middleName" class="form-control" (keypress)="keyPressChar($event)">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="name"><span class="required">* </span>Last Name : </label>
-              <input type="text" formControlName="lastName" class="form-control">
+              <input type="text" formControlName="lastName" class="form-control" (keypress)="keyPressChar($event)">
             </div>
             <p class="help-block" *ngIf="!patientForm.get('lastName').valid && patientForm.get('lastName').touched">Please enter last name.</p>
           </div>
@@ -56,7 +56,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="mobile"><span class="required">* </span>Mobile : </label>
-              <input type="number" max="10" name="mobile" class="form-control" formControlName="mobile" />
+              <input type="text" name="mobile" class="form-control" formControlName="mobile" (keypress)="keyPress($event)" minlength=10 maxlength=10/>
               <p class="help-block" *ngIf="!patientForm.get('contact.mobile').valid && patientForm.get('contact.mobile').touched">Mobile Number is required</p>
             </div>
           </div>
@@ -76,21 +76,21 @@
             </div>
             <div class="col-md-4">
               <label>City : </label>
-              <input type="text" class="form-control" formControlName="city">
+              <input type="text" class="form-control" formControlName="city" (keypress)="keyPressChar($event)">
             </div>
             <div class="col-md-4">
               <label>State : </label>
-              <input type="text" class="form-control" formControlName="state">
+              <input type="text" class="form-control" formControlName="state" (keypress)="keyPressChar($event)">
             </div>
           </div>
           <div class="row">
             <div class="col-md-4">
               <label>Country : </label>
-              <input type="text" class="form-control" formControlName="country">
+              <input type="text" class="form-control" formControlName="country" (keypress)="keyPressChar($event)">
             </div>
             <div class="col-md-4">
               <label>Zip:</label>
-              <input type="text" class="form-control" formControlName="zip">
+              <input type="text" class="form-control" formControlName="zip"  (keypress)="keyPress($event)" minlength=6 maxlength=6>
             </div>
           </div>
         </div>
